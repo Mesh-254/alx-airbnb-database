@@ -54,8 +54,7 @@ LEFT JOIN
     Payment pay ON b.booking_id = pay.booking_id;
 
 
-
--- Refactored query for better performance
+-- Refactored query with WHERE clause
 SELECT 
     b.booking_id,
     b.start_date,
@@ -74,4 +73,7 @@ JOIN
 JOIN 
     Property p ON b.property_id = p.property_id
 LEFT JOIN 
-    Payment pay ON b.booking_id = pay.booking_id;
+    Payment pay ON b.booking_id = pay.booking_id
+WHERE 
+    b.status = 'confirmed'
+    AND b.start_date >= CURRENT_DATE;
